@@ -16,7 +16,7 @@ export default {
     this.getProductsListFromAPI();
   },
   methods: {
-    ...mapActions(["getProductsListFromAPI"]),
+    ...mapActions("products", ["getProductsListFromAPI"]),
   },
 };
 </script>

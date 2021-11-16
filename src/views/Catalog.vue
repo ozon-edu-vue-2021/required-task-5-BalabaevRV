@@ -15,16 +15,16 @@
 <script>
 import ProductCard from "@/components/ProductCard.vue";
 import { mapState } from "vuex";
-console.log(mapState);
 
 export default {
   components: {
     ProductCard,
   },
   computed: {
-    ...mapState({
-      productsList: (state) => state.products.productsList,
-    }),
+    // ...mapState({
+    //   productsList: (state) => state.products.productsList,
+    // }),
+    ...mapState("products", ["productsList"])
   },
 };
 </script>

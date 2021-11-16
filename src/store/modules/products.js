@@ -20,7 +20,7 @@ const actions = {
     axios
       .get(PRODUCTS_API_ADRESS)
       .then((response) => {
-        this.commit("setProductsList", response.data);
+        this.commit("products/setProductsList", response.data);
       })
       .catch((error) => console.log(error));
   },
@@ -45,7 +45,7 @@ const mutations = {
 };
 
 export default {
-  namespaced: false,
+  namespaced: true,
   state,
   getters,
   actions,

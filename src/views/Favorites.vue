@@ -21,7 +21,7 @@ export default {
     ProductCard,
   },
   computed: {
-    ...mapGetters(["favList"]),
+    ...mapGetters("products", ["favList"]),
   },
 };
 </script>

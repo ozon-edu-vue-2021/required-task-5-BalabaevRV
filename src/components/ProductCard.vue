@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     ...mapMutations(["addToCartList", "toggleFav"]),
+    ...mapMutations("products", ["toggleFav"]),
     addToCart() {
       this.addToCartList({
         id: this.product.id,

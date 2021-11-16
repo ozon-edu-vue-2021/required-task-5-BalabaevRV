@@ -2,9 +2,8 @@
   <ul class="nav">
     <li v-for="item in menu" :key="item.link" class="nav__item">
       <router-link :to="item.link">{{ item.name }}</router-link>
-      <span v-if="item.name === 'Cart'" class="amount">{{ amountOfCart }}</span>
-      <span v-if="item.name === 'Favorites'" class="amount">{{
-        amountOfFav
+      <span v-if="item.amount" class="amount">{{
+        item.amount
       }}</span>
     </li>
   </ul>
@@ -16,7 +15,8 @@ import { routesLink } from "@/router/routes.js";
 
 export default {
   computed: {
-    ...mapGetters(["amountOfCart", "amountOfFav"]),
+    ...mapGetters(["amountOfCart"]),
+    ...mapGetters("products", ["amountOfFav"]),
     menu() {
       return [
         {
@@ -26,10 +26,12 @@ export default {
         {
           name: "Cart",
           link: routesLink.cart,
+          amount: this.amountOfCart,
         },
         {
           name: "Favorites",
           link: routesLink.favorites,
+          amount: this.amountOfFav,
         },
       ];
     },
