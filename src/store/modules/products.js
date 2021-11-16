@@ -28,14 +28,16 @@ const actions = {
 
 const mutations = {
   setProductsList(state, productsList) {
-    productsList.forEach((item) => {
-      const randomNumber = Math.round(Math.random() * (IMG_ARRAY.length - 1));
-      item.amountInBasket = 0;
-      item.inFav = false;
-      item.price = Math.round(Math.random() * 10000);
-      item.img = require("@/assets/images/" + IMG_ARRAY[randomNumber]);
+    state.productsList = productsList.map((item) => {
+      return {
+        ...item,
+        amountInBasket: 0,
+        inFav: false,
+        price: Math.round(Math.random() * 10000),
+        img: require("@/assets/images/" +
+          IMG_ARRAY[Math.round(Math.random() * (IMG_ARRAY.length - 1))]),
+      };
     });
-    state.productsList = productsList;
   },
   toggleFav(state, item) {
     item.inFav = !item.inFav;

@@ -14,15 +14,14 @@
 
 <script>
 import ProductCard from "@/components/ProductCard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     ProductCard,
   },
   computed: {
-    favList() {
-      return this.$store.getters.favList;
-    },
+    ...mapGetters(["favList"]),
   },
 };
 </script>

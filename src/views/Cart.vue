@@ -26,7 +26,9 @@
               type="number"
               class="inputNum"
               v-model="product.amount"
-              @change="changeTotalPrice(product.id, product.amount)"
+              @change="
+                changeTotalPrice({ value: +product.amount, id: product.id })
+              "
               min="1"
             />
           </td>
@@ -58,33 +60,17 @@
 
 <script>
 import BigButton from "@/components/BigButton.vue";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
     BigButton,
   },
   computed: {
-    cartList() {
-      return this.$store.getters.cartList;
-    },
-    totalPrice() {
-      return this.$store.getters.totalPrice;
-    },
-    amountOfCart() {
-      return this.$store.getters.amountOfCart;
-    },
+    ...mapGetters(["cartList", "totalPrice", "amountOfCart"]),
   },
   methods: {
-    removeFromCart(id) {
-      this.$store.commit("removeFromCart", id);
-    },
-    changeAmount(value) {
-      this.$store.commit("changeAmount", value);
-    },
-    changeTotalPrice(id, value) {
-      this.$store.commit("changeTotalPrice", { value: +value, id: id });
-      return this.$store.getters.changeTotalPrice;
-    },
+    ...mapMutations(["removeFromCart", "changeTotalPrice"]),
     checkout() {
       alert(JSON.stringify(this.cartList));
     },

@@ -19,7 +19,7 @@
       />
     </div>
     <favorite-button
-      @clickFavButton="addToFav"
+      @clickFavButton="toggleFav(product)"
       :class="[
         'productCard__stickyButton',
         { 'favoriteButton--active': product.inFav },
@@ -32,6 +32,7 @@
 import BigButton from "./BigButton";
 import FavoriteButton from "./FavoriteButton";
 import InputNum from "./InputNum";
+import { mapMutations } from "vuex";
 
 export default {
   props: {
@@ -58,15 +59,13 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(["addToCartList", "toggleFav"]),
     addToCart() {
-      this.$store.commit("addToCartList", {
+      this.addToCartList({
         id: this.product.id,
         amount: this.amount,
         price: this.product.price,
       });
-    },
-    addToFav() {
-      this.$store.commit("toggleFav", this.product);
     },
     changeAmount(value) {
       this.amount = +value;

@@ -1,27 +1,37 @@
 <template>
   <ul class="nav">
-    <li class="nav__item">
-      <router-link :to="{ name: 'catalog' }">Catalog</router-link>
-    </li>
-    <li class="nav__item">
-      <router-link :to="{ name: 'cart' }">Cart</router-link
-      ><span class="amount">{{ amountOfCart }}</span>
-    </li>
-    <li class="nav__item">
-      <router-link :to="{ name: 'favorites' }">Favorites</router-link
-      ><span class="amount">{{ amountOfFav }}</span>
+    <li v-for="item in menu" :key="item.link" class="nav__item">
+      <router-link :to="item.link">{{ item.name }}</router-link>
+      <span v-if="item.name === 'Cart'" class="amount">{{ amountOfCart }}</span>
+      <span v-if="item.name === 'Favorites'" class="amount">{{
+        amountOfFav
+      }}</span>
     </li>
   </ul>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { routesLink } from "@/router/routes.js";
+
 export default {
   computed: {
-    amountOfCart() {
-      return this.$store.getters.amountOfCart;
-    },
-    amountOfFav() {
-      return this.$store.getters.amountOfFav;
+    ...mapGetters(["amountOfCart", "amountOfFav"]),
+    menu() {
+      return [
+        {
+          name: "Сatalog",
+          link: routesLink.catalog,
+        },
+        {
+          name: "Cart",
+          link: routesLink.cart,
+        },
+        {
+          name: "Favorites",
+          link: routesLink.favorites,
+        },
+      ];
     },
   },
 };

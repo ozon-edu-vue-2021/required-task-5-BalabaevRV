@@ -7,12 +7,16 @@
 
 <script>
 import MainNav from "./components/MainNav.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
   components: { MainNav },
   mounted() {
-    this.$store.dispatch("getProductsListFromAPI");
+    this.getProductsListFromAPI();
+  },
+  methods: {
+    ...mapActions(["getProductsListFromAPI"]),
   },
 };
 </script>
