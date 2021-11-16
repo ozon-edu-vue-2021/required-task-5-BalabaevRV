@@ -1,14 +1,22 @@
 <template>
   <div id="app">
+    <main-nav />
+    <router-view />
   </div>
 </template>
 
 <script>
+import MainNav from "./components/MainNav.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "App",
-  components: {
-    Form,
+  components: { MainNav },
+  mounted() {
+    this.getProductsListFromAPI();
+  },
+  methods: {
+    ...mapActions("products", ["getProductsListFromAPI"]),
   },
 };
 </script>
