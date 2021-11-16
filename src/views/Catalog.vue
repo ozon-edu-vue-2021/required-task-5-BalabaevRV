@@ -14,15 +14,17 @@
 
 <script>
 import ProductCard from "@/components/ProductCard.vue";
+import { mapState } from "vuex";
+console.log(mapState);
 
 export default {
   components: {
     ProductCard,
   },
   computed: {
-    productsList() {
-      return this.$store.state.products.productsList;
-    },
+    ...mapState({
+      productsList: (state) => state.products.productsList,
+    }),
   },
 };
 </script>
