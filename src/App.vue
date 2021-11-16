@@ -1,14 +1,18 @@
 <template>
   <div id="app">
+    <main-nav />
+    <router-view />
   </div>
 </template>
 
 <script>
+import MainNav from "./components/MainNav.vue";
 
 export default {
   name: "App",
-  components: {
-    Form,
+  components: { MainNav },
+  mounted() {
+    this.$store.dispatch("getProductsListFromAPI");
   },
 };
 </script>
